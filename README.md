@@ -30,8 +30,16 @@ Add this line to the bottom of `.tmux.conf`:
 
 # Configuration
 
-> How do I define custom mappings?  For example, "u" to pipe the current Tmux
-> pane into `urlview`?
+> How do I define custom mappings?
+
+Defining a custom mapping is as easy as defining two options in your
+`tmux.conf`: one for the external command (i.e. `@externalpipe-$name-cmd`), and
+one for the mapping key (i.e.  `@externalpipe-$name-key`) -- replace `$name`
+with a mnemonic for the mapping you are about to create (e.g. `urlview`, or
+`cg`).
+
+> For example, how to pipe the current Tmux pane into `urlview`, on
+> `prefix + u`?
 
 Put the following in `tmux.conf`:
 
@@ -41,8 +49,8 @@ Put the following in `tmux.conf`:
 Reload Tmux, and that's it: hitting `prefix + u` should now prompt you with
 `urlview` link selection screen.
 
-You can find the following at the bottom of my
-[.tmux.conf](https://github.com/iamFIREcracker/dotfiles/blob/master/.tmux.conf):
+Other examples can be found at the bottom of my
+[tmux.conf](https://github.com/iamFIREcracker/dotfiles/blob/master/.tmux.conf):
 
     # tmux-externalpipe
     set -g @externalpipe-cg-cmd      'cg-fzf'
