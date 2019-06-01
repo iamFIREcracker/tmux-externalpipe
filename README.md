@@ -13,7 +13,7 @@ I am fond of similar plugins such as
 [tmux-urlview](https://github.com/tmux-plugins/tmux-urlview) or
 [tmux-fpp](https://github.com/tmux-plugins/tmux-fpp), but when I found myself
 in need of creating a new one for [cg](https://github.com/iamFIREcracker/cg)
--- which, as expected, turned out being a 1% custom, and 99% copypasta --
+-- which, as expected, turned out being 1% custom and 99% copypasta --
 I decided it was time for something more generic, and reusable.
 
 _enters `tmux-externalpipe`.._
