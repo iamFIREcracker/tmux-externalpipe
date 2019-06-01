@@ -22,13 +22,11 @@ _enters `tmux-externalpipe`.._
 
 Clone the repo:
 
-    git clone https://github.com/iamFIREcracker/tmux-externalpipe ~/.tmux-plugins/
+    git clone https://github.com/iamFIREcracker/tmux-externalpipe ~/.tmux-plugins/tmux-externalpipe
 
 Add this line to the bottom of `.tmux.conf`:
 
     run-shell ~/.tmux-plugins/tmux-externalpipe/externalpipe.tmux
-
-Reload Tmux -- you should be all set.
 
 # Configuration
 
@@ -40,7 +38,10 @@ Put the following in `tmux.conf`:
     set -g @externalpipe-urlview-cmd 'urlview'
     set -g @externalpipe-urlview-key 'u'
 
-Reload Tmux.  You can find the following at the bottom of my
+Reload Tmux, and that's it: hitting `prefix + u` should now prompt you with
+`urlview` link selection screen.
+
+You can find the following at the bottom of my
 [.tmux.conf](https://github.com/iamFIREcracker/dotfiles/blob/master/.tmux.conf):
 
     # tmux-externalpipe
