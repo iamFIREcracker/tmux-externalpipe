@@ -1,6 +1,6 @@
 # Tmux externalpipe
 
-Easily pipe Tmux pane content into an external command of choice.
+Easily pipe Tmux panes content into an external command of choice.
 
 # Background
 
