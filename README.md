@@ -22,7 +22,7 @@ _enters `tmux-externalpipe`.._
 
 Clone the repo:
 
-    git clone https://github.com/iamFIREcracker/tmux-externalpipe ~/.tmux-plugins/tmux-externalpipe
+    > git clone https://github.com/iamFIREcracker/tmux-externalpipe ~/.tmux-plugins/tmux-externalpipe
 
 Add this line to the bottom of `.tmux.conf`:
 
