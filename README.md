@@ -1,13 +1,13 @@
 # Tmux externalpipe
 
-Easily pipe Tmux panes content into an external command of choice.
+Easily pipe Tmux panes content into an external program of choice.
 
 # Background
 
 Heavily inspired by `st`'s
 [externalpipe](https://st.suckless.org/patches/externalpipe/) patch,
 `tmux-externalpipe` lets you define mappings to pipe the content of the current
-Tmux pane into an external command of choice.
+Tmux pane into an external program of choice.
 
 I am fond of similar plugins such as
 [tmux-urlview](https://github.com/tmux-plugins/tmux-urlview) or
@@ -33,7 +33,7 @@ Add this line to the bottom of `.tmux.conf`:
 > How do I define custom mappings?
 
 Defining a custom mapping is as easy as defining two options in your
-`tmux.conf`: one for the external command (i.e. `@externalpipe-$name-cmd`), and
+`tmux.conf`: one for the external program (i.e. `@externalpipe-$name-cmd`), and
 one for the mapping key (i.e.  `@externalpipe-$name-key`) -- replace `$name`
 with a mnemonic for the mapping you are about to create (e.g. `urlview`, or
 `cg`).
