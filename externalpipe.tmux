@@ -33,3 +33,9 @@ for opt in $(tmux show-options -gq | grep '@externalpipe.*key' | cut -d' ' -f1);
       send-keys -t . " sh -c 'cat \"${TMPDIR:-/tmp}/tmux-buffer\" | $exe'" Enter
   fi
 done
+
+tmux bind-key \| \
+  capture-pane -J \\\; \
+  save-buffer "${TMPDIR:-/tmp}/tmux-buffer" \\\; \
+  delete-buffer \\\; \
+  command-prompt -p "Shell command:" "split-window sh -c 'cat \"${TMPDIR:-/tmp}/tmux-buffer\" | %%'"
