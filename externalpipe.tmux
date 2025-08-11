@@ -39,3 +39,8 @@ tmux bind-key \| \
   save-buffer "${TMPDIR:-/tmp}/tmux-buffer" \\\; \
   delete-buffer \\\; \
   command-prompt -p "Shell command:" "split-window sh -c 'cat \"${TMPDIR:-/tmp}/tmux-buffer\" | %%'"
+
+
+tmux bind-key -T copy-mode-vi \| \
+  send -X copy-pipe-and-cancel "cat > \"${TMPDIR:-/tmp}/tmux-buffer\"" \\\; \
+  command-prompt -p "Shell command:" "split-window sh -c 'cat \"${TMPDIR:-/tmp}/tmux-buffer\" | %%'"
