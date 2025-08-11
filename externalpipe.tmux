@@ -35,9 +35,7 @@ for opt in $(tmux show-options -gq | grep '@externalpipe.*key' | cut -d' ' -f1);
 done
 
 tmux bind-key \| \
-  capture-pane -J \\\; \
-  save-buffer "${TMPDIR:-/tmp}/tmux-buffer" \\\; \
-  delete-buffer \\\; \
+  capture-pane -J \\\; save-buffer "${TMPDIR:-/tmp}/tmux-buffer" \\\; delete-buffer \\\; \
   command-prompt -p "Shell command:" "split-window sh -c 'cat \"${TMPDIR:-/tmp}/tmux-buffer\" | %%'"
 
 
