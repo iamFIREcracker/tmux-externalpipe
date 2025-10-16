@@ -40,5 +40,5 @@ tmux bind-key \| \
 
 
 tmux bind-key -T copy-mode-vi \| \
-  send -X copy-pipe-and-cancel "cat > \"${TMPDIR:-/tmp}/tmux-buffer\"" \\\; \
+  send -X pipe-and-cancel "cat > \"${TMPDIR:-/tmp}/tmux-buffer\"" \\\; \
   command-prompt -p "Shell command:" "new-window -b sh -c 'cat \"${TMPDIR:-/tmp}/tmux-buffer\" | %%; echo; echo \"[finished]\\\\a\"; while :; do sleep 2073600; done'"
