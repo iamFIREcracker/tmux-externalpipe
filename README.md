@@ -61,3 +61,17 @@ Other examples can be found at the bottom of my
     set -g @externalpipe-urlview-cmd 'urlview'
     set -g @externalpipe-urlview-key 'u'
     run-shell ~/.tmux-plugins/tmux-externalpipe/externalpipe.tmux
+
+# Built-in mappings
+
+In addition to custom mappings, `tmux-externalpipe` provides a built-in
+`|` binding:
+
+- **`prefix + |`**: Prompts for a shell command and pipes the current
+  pane content into it
+- **`| (in copy-mode-vi)`**: Prompts for a shell command and pipes the
+  selected text into it
+
+The command will open in a new window to the left, which remains open
+after the command finishes (displaying `[finished]`), allowing you to
+review the output.
