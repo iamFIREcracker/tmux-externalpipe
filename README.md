@@ -50,6 +50,10 @@ Put the following in `tmux.conf`:
 Reload Tmux, and that's it: hitting `prefix + u` should now prompt you
 with `urlview` link selection screen.
 
+Custom mappings also work in **copy-mode-vi**: select some text, then
+press the mapped key (e.g. `u`) to pipe just the selection into the
+external program.
+
 Other examples can be found at the bottom of my
 [tmux.conf](https://github.com/iamFIREcracker/dotfiles/blob/master/.tmux.conf):
 
