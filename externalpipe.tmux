@@ -27,18 +27,29 @@ for opt in $(tmux show-options -gq | grep '@externalpipe.*key' | cut -d' ' -f1);
   if [ -z "$exe" ]; then
     tmux display-message "tmux-externalpipe: $cmd was not found on the PATH"
   else
+    # Normal mode: prefix + key → whole pane
     tmux bind-key "$key" capture-pane -J \\\; \
       save-buffer "${TMPDIR:-/tmp}/tmux-buffer" \\\; \
       delete-buffer \\\; \
       send-keys -t . " sh -c 'cat \"${TMPDIR:-/tmp}/tmux-buffer\" | $exe'" Enter
+
+    # Copy-mode-vi: key → selection only (opens in new window to the left)
+    # The writer touches a done flag after writing, and the window waits for
+    # it: both commands spawn together, and a window that opened the buffer
+    # file before the writer's data arrived read an empty selection, which
+    # made cg guess nothing and fzf --exit-0 exit without showing its UI.
+    tmux bind-key -T copy-mode-vi "$key" \
+      send -X pipe-and-cancel "rm -f \"${TMPDIR:-/tmp}/tmux-buffer.ok\"; cat > \"${TMPDIR:-/tmp}/tmux-buffer\"; touch \"${TMPDIR:-/tmp}/tmux-buffer.ok\"" \\\; \
+      new-window -b "sh -c 'until [ -e \"${TMPDIR:-/tmp}/tmux-buffer.ok\" ]; do sleep 0.05; done; cat \"${TMPDIR:-/tmp}/tmux-buffer\" | $exe; printf \"\\n[finished]\\a\"; while :; do sleep 2073600; done'"
   fi
 done
 
 tmux bind-key \| \
   capture-pane -J \\\; save-buffer "${TMPDIR:-/tmp}/tmux-buffer" \\\; delete-buffer \\\; \
-  command-prompt -p "Shell command:" "new-window -b sh -c 'cat \"${TMPDIR:-/tmp}/tmux-buffer\" | %%; echo; echo \"[finished]\\a\"; while :; do sleep 2073600; done'"
+  run-shell "touch \"${TMPDIR:-/tmp}/tmux-buffer.ok\"" \\\; \
+  command-prompt -p "Shell command:" "new-window -b sh -c 'until [ -e \"${TMPDIR:-/tmp}/tmux-buffer.ok\" ]; do sleep 0.05; done; cat \"${TMPDIR:-/tmp}/tmux-buffer\" | %%; printf \"\\n[finished]\\a\"; while :; do sleep 2073600; done'"
 
 
 tmux bind-key -T copy-mode-vi \| \
-  send -X pipe-and-cancel "cat > \"${TMPDIR:-/tmp}/tmux-buffer\"" \\\; \
-  command-prompt -p "Shell command:" "new-window -b sh -c 'cat \"${TMPDIR:-/tmp}/tmux-buffer\" | %%; echo; echo \"[finished]\\\\a\"; while :; do sleep 2073600; done'"
+  send -X pipe-and-cancel "rm -f \"${TMPDIR:-/tmp}/tmux-buffer.ok\"; cat > \"${TMPDIR:-/tmp}/tmux-buffer\"; touch \"${TMPDIR:-/tmp}/tmux-buffer.ok\"" \\\; \
+  command-prompt -p "Shell command:" "new-window -b sh -c 'until [ -e \"${TMPDIR:-/tmp}/tmux-buffer.ok\" ]; do sleep 0.05; done; cat \"${TMPDIR:-/tmp}/tmux-buffer\" | %%; printf \"\\n[finished]\\a\"; while :; do sleep 2073600; done'"
